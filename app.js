@@ -1,14 +1,28 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Use middleware to parse JSON
-app.use(bodyParser.json());
-app.use(cors());
+// Middleware to parse JSON
+app.use(express.json());
+
+// CORS configuration
+const corsOptions = {
+    origin: ['https://economize-server.vercel.app', 'https://vercel.app'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+
+// Enable CORS for all routes
+app.use(cors(corsOptions));
+
+
+
+
+
 
 
 // MySQL connection
