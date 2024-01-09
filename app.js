@@ -19,6 +19,10 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
+app.get('/',(req,res)=>{
+    res.send('Hello, this is the home page!');
+})
+
 // Route to add a new todo
 app.post('/addTodo', async (req, res) => {
     const { task } = req.body;
