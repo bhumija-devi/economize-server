@@ -1,12 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Use middleware to parse JSON
 app.use(bodyParser.json());
+app.use(cors());
 
 // MySQL connection
 const pool = mysql.createPool({
