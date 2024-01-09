@@ -10,16 +10,18 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
+
 // MySQL connection
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Mahadevi123@',
-    database: 'todo',
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'Mahadevi123@',
+    database: process.env.DB_NAME || 'todo',
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
 });
+
 
 app.get('/',(req,res)=>{
     res.send('Hello, this is the home page!');
