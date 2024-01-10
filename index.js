@@ -3,7 +3,7 @@ const cors = require('cors');
 const mysql = require('mysql2/promise');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -20,19 +20,15 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-
-
-
 // MySQL connection
 const pool = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || 'Mahadevi123@',
-    database: process.env.DB_NAME || 'todo',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-});
+    host: 'localhost',
+    user: 'root',
+    password: 'Mahadevi123@',
+    database: 'todo',
+    connectionLimit: 10, // Adjust according to your needs
+    waitForConnections: true, // Enable this to queue connection requests if limit is reached
+  });
 
 
 app.get('/',(req,res)=>{
@@ -65,8 +61,9 @@ app.get('/getTodoList', async (req, res) => {
         res.json(rows);
     } catch (error) {
         console.error('Error fetching todo list:', error);
-        res.status(500).json({ success: false, message: 'Error fetching todo list' });
-    }
+        res.status(500).json({ success: false, message: 'Error fetching todo list', error: error.message });
+      }
+      
 });
 
 // Route to delete a todo by ID
