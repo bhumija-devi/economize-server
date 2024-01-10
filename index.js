@@ -23,7 +23,7 @@ app.use(cors(corsOptions));
 // MySQL connection
 const pool = mysql.createPool({
     host: 'localhost',
-    user: 'root',
+    user: 'devi',
     password: 'Mahadevi123@',
     database: 'todo',
     connectionLimit: 10, // Adjust according to your needs
